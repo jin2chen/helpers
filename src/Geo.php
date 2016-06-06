@@ -3,7 +3,7 @@ namespace mole\helpers;
 
 /**
  * GEO convert.
- * 
+ *
  * @author Jin Chen <jmole.chen@gmail.com>
  * @since 1.0
  */
@@ -11,10 +11,10 @@ class Geo
 {
     /**
      * Convert circle to polygon.
-     * 
+     *
      * @param float $lon
      * @param float $lat
-     * @param float $radius 
+     * @param float $radius
      * @param int $sides
      * @return array
      */
@@ -22,7 +22,7 @@ class Geo
     {
         $points = [];
         $earthRadius = 6371;
-        
+
         //angular distance covered on earth's surface
         $d = $radius / 1000 / $earthRadius;
         $lon = $lon * M_PI / 180;
@@ -37,14 +37,14 @@ class Geo
             $points[] = [$gpos['longitude'], $gpos['latitude']];
         }
         $points[] = $points[0];
-        
+
         return $points;
     }
-    
+
     /**
      * Calculate the square point.
      * At a point as the center point, calculate the square of the four points.
-     * 
+     *
      * Result:
      * ~~~
      * [
@@ -54,10 +54,10 @@ class Geo
      *     'left-bottom' => '<float>',
      * ]
      * ~~~
-     * 
+     *
      * @param float $lng
      * @param float $lat
-     * @param float $distance KM
+     * @param float|int $distance KM
      * @return array
      */
     public static function squarePoint($lng, $lat, $distance = 1)
@@ -65,10 +65,10 @@ class Geo
         $earthRadius = 6371;
         $dlng = 2 * asin(sin($distance / (2 * $earthRadius)) / cos(deg2rad($lat)));
         $dlng = rad2deg($dlng);
-    
+
         $dlat = $distance / $earthRadius;
         $dlat = rad2deg($dlat);
-    
+
         return [
             [$lng - $dlng, $lat + $dlat],
             [$lng + $dlng, $lat + $dlat],

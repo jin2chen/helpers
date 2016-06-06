@@ -11,5 +11,8 @@
         "psr-4": {
             "mole\\helpers\\": "src/"
         }
+    },
+    "require-dev": {
+        "codeception/codeception": "^2.2"
     }
 }

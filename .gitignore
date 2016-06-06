@@ -13,7 +13,7 @@ nbproject
 Thumbs.db
 
 # composer vendor dir
-#/vendor
+/vendor
 
 # vagrant dir
 /.vagrant
@@ -34,3 +34,5 @@ npm-debug.log
 *.sublime-workspace
 /config/*.db
 test.php
+
+tests/_output/*
