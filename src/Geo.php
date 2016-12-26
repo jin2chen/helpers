@@ -46,14 +46,14 @@ class Geo
      * At a point as the center point, calculate the square of the four points.
      *
      * Result:
-     * ~~~
+     * ```php
      * [
      *     'left-top' => '<float>',
      *     'right-top' => '<float>',
      *     'right-bottom' => '<float>',
      *     'left-bottom' => '<float>',
      * ]
-     * ~~~
+     * ```
      *
      * @param float $lng
      * @param float $lat

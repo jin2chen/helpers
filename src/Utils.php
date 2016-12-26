@@ -12,16 +12,17 @@ namespace mole\helpers;
 class Utils
 {
     /**
-     * Build url.
+     * Build url for API request.
+     *
      * If the path index of :xx and params has key `xx`, the path will be replace by the params[xx] value.
      *
-     * ~~~
-     * Utils::buildUrl('http://localhost/rest', '/user/:id', ['id' => 1, 'status' => 0]);
+     * ```php
+     * Utils::buildUrl('http://localhost/rest', '/user/{id}', ['id' => 1, 'status' => 0]);
      * //=> http://localhost/rest/user/1?status=0
-     * ~~~
+     * ```
      *
      * @param string $baseUrl http://localhost/rest
-     * @param string $path /user/:id
+     * @param string $path /user/{id}
      * @param array $params query params for url.
      * @return string
      */
@@ -31,7 +32,7 @@ class Utils
             $params = [];
         }
 
-        $path = preg_replace_callback('/:(\w+)/', function($matches) use (&$params) {
+        $path = preg_replace_callback('/\{(\w+)\}/', function($matches) use (&$params) {
             if (isset($params[$matches[1]])) {
                 $tmp = $params[$matches[1]];
                 unset($params[$matches[1]]);
@@ -47,40 +48,6 @@ class Utils
         }
 
         return rtrim($baseUrl, '/') . '/' . rtrim($path);
-    }
-
-    /**
-     * Remove file BOM.
-     * If the file save as BOM, BOM will be removed and save as a new file.
-     *
-     * @param string $filename
-     * @return void
-     */
-    public static function cleanBom($filename)
-    {
-        if (true) {
-
-        }
-
-        $bufsize = 65536; // 64K
-        $utf8bom = "\\xef\\xbb\\xbf";
-
-        $outfile = $filename . '.tmp';
-        $inf = fopen($filename, 'r');
-        $outf = fopen($outfile, 'w');
-
-        $buf = fread($inf, strlen($utf8bom));
-        if ($buf != $utf8bom) {
-            fwrite($outf, $buf);
-        }
-        if ($buf == "") {
-            return;
-        }
-        while (($buf = fread($inf, $bufsize))) {
-            fwrite($outf, $buf);
-        }
-
-        return;
     }
 
     /**
