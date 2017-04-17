@@ -95,4 +95,22 @@ class Utils
         $b64 = str_replace(['-', '_'], ['+', '/'], $b64);
         return base64_decode($b64);
     }
+
+    /**
+     * @param string $year
+     * @param string $month
+     * @return array
+     */
+    public static function monthStartAndEnd($year = null, $month = null)
+    {
+        $year = $year === null ? date('Y') : $year;
+        $month = $month === null ? date('m') : $month;
+        $start = date('Y-m-d', strtotime(sprintf('%s-%s-01', $year, $month)));
+        $end = date('Y-m-d', strtotime('-1 day', strtotime('+1 month', strtotime($start))));
+
+        return [
+            $start,
+            $end
+        ];
+    }
 }
